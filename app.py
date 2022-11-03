@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return render_template('bfaCalc.html')
+    return render_template('form.html')
 
 @app.route("/handle_calculation", methods=['POST'])
 def output_calc():
