@@ -14,31 +14,55 @@ def report_generator():
     company_name = request.form.get("company_name")
 
     #Debt
-    person_debt = request.form.get("person_debt")
-    business_debt = request.form.get("business_debt")
+    try:
+        person_debt = float(request.form.get("person_debt"))
+    except ValueError:
+        person_debt = ""
 
+    try:
+        business_debt = float(request.form.get("business_debt"))
+    except ValueError:
+        business_debt = ""
     #Personal Income
-    person_income = request.form.get("person_income")
+    try:
+        person_income = float(request.form.get("person_income"))
+    except ValueError:
+        person_income = ""
     person_year_1 = request.form.get("person_year_1")
     person_year_2 = request.form.get("person_year_2")
     person_year_3 = request.form.get("person_year_3")
 
 
     #Business Income
-    business_income = request.form.get("business_income")
+    try:
+        business_income = float(request.form.get("business_income"))
+    except ValueError:
+        business_income = ""
     business_year_1 = request.form.get("business_year_1")
     business_year_2 = request.form.get("business_year_2")
     business_year_3 = request.form.get("business_year_3")
 
     #Debt Ratio
-    DTO = request.form.get("DTO")
-    DTI = request.form.get("DTI")
+    try:
+        DTO = float(request.form.get("DTO"))
+    except ValueError:
+        DTO = ""
+    try:
+        DTI = float(request.form.get("DTI"))
+    except ValueError:
+         DTI = ""
     #GDSCR = (person_income+business_income)/(person_debt+business_debt)
     
 
     #Bank Statement Info
-    capacity = request.form.get("capacity")
-    balance = request.form.get("balance")
+    try:
+        capacity = float(request.form.get("capacity"))
+    except ValueError:
+        capacity = ""
+    try:
+        balance = float(request.form.get("balance"))
+    except ValueError:
+        balance = ""
 
     #Credit Score
     ex = request.form.get("ex")
@@ -47,8 +71,8 @@ def report_generator():
 
 
 
-    print(type(person_debt))
-    return render_template('bfaReport.html')
+    print(type(person_debt),person_debt)
+    return render_template('outputCalc.html')
 
 @app.route("/business")
 def output_calc():
