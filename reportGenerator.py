@@ -59,7 +59,7 @@ for qty, id, desc in records:
     row_cells[0].text = str(qty)
     row_cells[1].text = id
     row_cells[2].text = desc
+print(document)
+#document.add_page_break()
 
-document.add_page_break()
-
-document.save('demo.docx')
+#document.save('demo.docx')

@@ -1,5 +1,6 @@
 from flask import Flask
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, send_file
+import os
 
 app = Flask(__name__)
 
@@ -51,7 +52,10 @@ def report_generator():
         DTI = float(request.form.get("DTI"))
     except ValueError:
          DTI = ""
-    #GDSCR = (person_income+business_income)/(person_debt+business_debt)
+    try:     
+        GDSCR = (person_income+business_income)/(person_debt+business_debt)
+    except ValueError and TypeError:
+        GDSCR = 0
     
 
     #Bank Statement Info
@@ -70,13 +74,21 @@ def report_generator():
     tu = request.form.get("tu")
 
 
-
-    print(type(person_debt),person_debt)
+    print("Your GDSCR IS ")
+    #print(GDSCR)
     return render_template('outputCalc.html')
 
-@app.route("/business")
-def output_calc():
-    return render_template('business.html')
+@app.route("/download_file")
+def download_file():
+    file_path = "demo.docx"
+    return_status = False
+    if os.path.exists(file_path) and return_status == False:
+        return_status = True
+        return send_file(file_path, as_attachment=True)
+        os.remove(file_path)
+    return render_template("bfaReport.html")
+    
+
 
 
 if __name__ == "__main__":
