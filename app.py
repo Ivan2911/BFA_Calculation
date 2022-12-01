@@ -1,8 +1,13 @@
 from flask import Flask
 from flask import Flask, render_template, request, redirect, session, send_file
 import os
-
+from reportGenerator import generate_report
 app = Flask(__name__)
+
+
+doc_dir = "documents/"   #Directory to save files/reports
+fileName = "BFA_REPORT"  #To store the file name, default name is BFA Report
+
 
 @app.route("/")
 def home():
@@ -10,6 +15,12 @@ def home():
 
 @app.route("/handle_report", methods=['POST'])
 def report_generator():
+    #Initiate file name
+    fileName = "BFA_REPORT" #To store the file name, default name is BFA Report
+    #Delete any file in the directory
+    for filename in os.listdir(doc_dir):
+        os.remove(doc_dir+filename)
+
     #general information
     person_name = request.form.get("person_name")
     company_name = request.form.get("company_name")
@@ -73,21 +84,22 @@ def report_generator():
     eq = request.form.get("eq")
     tu = request.form.get("tu")
 
-
-    print("Your GDSCR IS ")
+    #Generate report
+    if person_name != "":
+        fileName = person_name
+    generate_report(fileName)
+    print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+    print(person_name)
     #print(GDSCR)
     return render_template('outputCalc.html')
 
 @app.route("/download_file")
 def download_file():
-    file_path = "demo.docx"
-    return_status = False
-    if os.path.exists(file_path) and return_status == False:
-        return_status = True
-        return send_file(file_path, as_attachment=True)
-        os.remove(file_path)
-    return render_template("bfaReport.html")
-    
+    file_path = "documents/"+fileName
+    print("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
+    print(file_path)
+    return send_file(file_path, as_attachment=True)
+   
 
 
 

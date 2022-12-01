@@ -14,13 +14,11 @@
 
 
 #Bank Statement Analysis
-
-
-
 #document.save("BFA Report for " + person_name + " " + business_name)
 
-from docx import Document
+"""
 from docx.shared import Inches
+from docx import Document
 
 document = Document()
 
@@ -59,7 +57,19 @@ for qty, id, desc in records:
     row_cells[0].text = str(qty)
     row_cells[1].text = id
     row_cells[2].text = desc
-print(document)
+
 #document.add_page_break()
 
-#document.save('demo.docx')
+#document.save('\documents\demo.docx')
+
+"""
+import os
+def generate_report(docName):
+    directory = './documents/'
+    filename = docName
+    file_path = os.path.join(directory, filename)
+    if not os.path.isdir(directory):
+        os.mkdir(directory)
+    file = open(file_path, "w")
+    file.write("you have realy good GDSCR")
+    file.close()
