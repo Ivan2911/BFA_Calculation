@@ -3,11 +3,13 @@ from flask import Flask, render_template, request, redirect, session, send_file
 import os
 from reportGenerator import generate_report
 app = Flask(__name__)
+app.secret_key = "customer1st"
+
 
 
 doc_dir = "documents/"   #Directory to save files/reports
-fileName = "BFA_REPORT"  #To store the file name, default name is BFA Report
-
+fileName = ""  #To store the file name, default name is BFA Report
+file_path = ""
 
 @app.route("/")
 def home():
@@ -87,18 +89,21 @@ def report_generator():
     #Generate report
     if person_name != "":
         fileName = person_name
-    generate_report(fileName)
+    file_path = generate_report(fileName)
+    session["file_path"] = file_path
     print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-    print(person_name)
+    print(file_path)
     #print(GDSCR)
     return render_template('outputCalc.html')
 
-@app.route("/download_file")
+@app.route("/download")
 def download_file():
-    file_path = "documents/"+fileName
+    file_path = session.get("file_path", None)
     print("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
     print(file_path)
+    #f = open(file_path, "r")
     return send_file(file_path, as_attachment=True)
+    #return render_template('bfaReport.html')
    
 
 

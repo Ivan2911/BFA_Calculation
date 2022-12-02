@@ -64,12 +64,21 @@ for qty, id, desc in records:
 
 """
 import os
+import tempfile
+
+def tmp_dir():
+    with tempfile.TemporaryDirectory() as tmpdirname:
+        return(tempfile.gettempdir())
+
 def generate_report(docName):
-    directory = './documents/'
-    filename = docName
+
+    #Created temporary directory
+    directory = tmp_dir()
+
+    filename = docName + ".txt"
     file_path = os.path.join(directory, filename)
-    if not os.path.isdir(directory):
-        os.mkdir(directory)
+    
     file = open(file_path, "w")
-    file.write("you have realy good GDSCR")
+    file.write("you have realy good GDSCR "+ docName)
     file.close()
+    return file_path
