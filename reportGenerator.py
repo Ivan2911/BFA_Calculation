@@ -14,13 +14,11 @@
 
 
 #Bank Statement Analysis
-
-
-
 #document.save("BFA Report for " + person_name + " " + business_name)
 
-from docx import Document
+"""
 from docx.shared import Inches
+from docx import Document
 
 #inititate Documents
 document = Document()
@@ -63,7 +61,7 @@ for qty, id, desc in records:
     row_cells[0].text = str(qty)
     row_cells[1].text = id
     row_cells[2].text = desc
-print(document)
+
 #document.add_page_break()
 
-document.save('BFA.docx')
+#document.save('demo.docx')
