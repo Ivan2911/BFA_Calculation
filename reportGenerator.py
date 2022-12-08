@@ -22,10 +22,14 @@
 from docx import Document
 from docx.shared import Inches
 
+#inititate Documents
 document = Document()
 
-document.add_heading('Document Title', 0)
+#Heading
+heading = document.add_heading('Business Funding Analysis', 0)
 
+#Personal credit profile
+personal = document.add_heading('Personal Credit Profile', level=1)
 p = document.add_paragraph('A plain paragraph having some ')
 p.add_run('bold').bold = True
 p.add_run(' and some ')
@@ -62,4 +66,4 @@ for qty, id, desc in records:
 print(document)
 #document.add_page_break()
 
-#document.save('demo.docx')
+document.save('BFA.docx')
