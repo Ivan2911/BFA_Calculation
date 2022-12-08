@@ -6,8 +6,6 @@ app = Flask(__name__)
 app.secret_key = "customer1st"
 
 
-
-doc_dir = "documents/"   #Directory to save files/reports
 fileName = ""  #To store the file name, default name is BFA Report
 file_path = ""
 
@@ -19,9 +17,6 @@ def home():
 def report_generator():
     #Initiate file name
     fileName = "BFA_REPORT" #To store the file name, default name is BFA Report
-    #Delete any file in the directory
-    for filename in os.listdir(doc_dir):
-        os.remove(doc_dir+filename)
 
     #general information
     person_name = request.form.get("person_name")
