@@ -84,7 +84,31 @@ def report_generator():
     #Generate report
     if person_name != "":
         fileName = person_name
-    file_path = generate_report(fileName)
+
+    dic_summary = {
+        "name":fileName,
+        "company":company_name,
+        "person_debt":person_debt,
+        "business_debt":business_debt,
+        "person_income": person_income,
+        "person_year1": person_year_1,
+        "person_year2": person_year_2,
+        "person_year3": person_year_3,
+        "business_income": business_income,
+        "business_year1": business_year_1,
+        "business_year2": business_year_2,
+        "business_year3":business_year_3,
+        "DTO":DTO,
+        "DTI": DTI,
+        "GDSCR": GDSCR ,
+        "capacity": capacity,
+        "balance": balance,
+        "ex": ex,
+        "eq": eq,
+        "tu": tu
+        }
+
+    file_path = generate_report(dic_summary)
     session["file_path"] = file_path
     print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
     print(file_path)

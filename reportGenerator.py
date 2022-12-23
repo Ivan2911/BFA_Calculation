@@ -3,7 +3,30 @@ from docx.shared import Inches
 from docx import Document
 
 
-def report_content(name):
+def report_content(dict):
+    
+    #get infor details from dictionary
+    name = dict["name"]
+    company = dict["company"]
+    person_debt = dict["person_debt"]
+    business_debt= dict["business_debt"]
+    person_income= dict["person_income"]
+    person_year1= dict["person_year1"]
+    person_year2= dict["person_year2"]
+    person_year3= dict["person_year3"]
+    business_income= dict["business_income"]
+    business_year1= dict["business_year1"]
+    business_year2= dict["business_year2"]
+    business_year3= dict["business_year3"]
+    DTO= dict["DTO"]
+    DTI= dict["DTI"]
+    GDSCR= dict["GDSCR"]
+    capacity= dict["capacity"]
+    balance= dict["balance"]
+    ex= dict["ex"]
+    eq = dict["eq"]
+    tu = dict["tu"]
+
     #Initiate document
     document = Document()
 
@@ -21,7 +44,7 @@ def report_content(name):
     document.add_heading('Personal Credit Profile', level=1)
     document.add_paragraph('Credit Scores', style='List Bullet')
     records = (
-        (name, '500', '450','440')
+        (name, ex, eq, tu)
     )
     table = document.add_table(rows=1, cols=4)
     hdr_cells = table.rows[0].cells
@@ -32,9 +55,9 @@ def report_content(name):
 
     row_cells = table.add_row().cells
     row_cells[0].text = name
-    row_cells[1].text = "700"
-    row_cells[2].text = "695"
-    row_cells[3].text = "690"
+    row_cells[1].text = ex
+    row_cells[2].text = eq
+    row_cells[3].text = tu
     """
       for Name, TU, EQ, EX in records:
         row_cells = table.add_row().cells
@@ -74,16 +97,19 @@ def tmp_dir():
     with tempfile.TemporaryDirectory() as tmpdirname:
         return(tempfile.gettempdir())
 
-def generate_report(docName):
+def generate_report(dict):
+
+    #get name
+    name = dict["name"]
 
     #Created temporary directory
     directory = tmp_dir()
 
-    filename = docName + ".docx"
+    filename = name + ".docx"
     file_path = os.path.join(directory, filename)
 
     #Generate Report
-    report = report_content(docName)
+    report = report_content(dict)
 
     #Save the report in temporary directory
     report.save(file_path)
@@ -92,3 +118,4 @@ def generate_report(docName):
     #file.write("you have realy good GDSCR "+ docName)
     #file.close()
     return file_path
+
