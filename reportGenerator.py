@@ -58,6 +58,7 @@ def report_content(dict):
     row_cells[1].text = ex
     row_cells[2].text = eq
     row_cells[3].text = tu
+
     """
       for Name, TU, EQ, EX in records:
         row_cells = table.add_row().cells
@@ -105,7 +106,7 @@ def generate_report(dict):
     #Created temporary directory
     directory = tmp_dir()
 
-    filename = name + ".docx"
+    filename = "BFA for " + name + ".docx"
     file_path = os.path.join(directory, filename)
 
     #Generate Report
