@@ -61,7 +61,7 @@ def report_generator():
     except ValueError:
          DTI = ""
     try:     
-        GDSCR = (person_income+business_income)/(person_debt+business_debt)
+        GDSCR = round((person_income+business_income)/(person_debt+business_debt), 2)
     except ValueError and TypeError:
         GDSCR = 0
     

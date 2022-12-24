@@ -27,13 +27,31 @@ def report_content(dict):
     eq = dict["eq"]
     tu = dict["tu"]
 
+    #Calculation
+    try:
+        total_income = int(person_income) + int(business_income)
+    except ValueError:
+        total_income = 0
+    try:
+
+        total_debt_pmt = int(person_debt) + int(business_debt)
+    except ValueError:
+        total_debt_pmt = 0
+
+    #Change to string to be able to concate in the documents
+    total_income = str(total_income)
+    total_debt_pmt = str(total_debt_pmt)
+    GDSCR = str(GDSCR)
+    DTO = str(DTO)
+    DTI = str(DTI)
+
     #Initiate document
     document = Document()
 
     #Header
     document.add_picture('picture/wcf_logo.png', width=Inches(3))
     document.add_heading('Personal Business Financial Analysis', 0)
-    document.add_paragraph('for '+ name)
+    #document.add_paragraph('for '+ name)
     document.add_paragraph('Prepared by Wallace Capital Funding, LLC ')
 
     #Person Name
@@ -71,21 +89,21 @@ def report_content(dict):
   
 
     document.add_paragraph('PCW: '+ name, style='List Bullet')
-    document.add_paragraph('   Debt-to-Owing Ratio (DTO):')
-    document.add_paragraph('   Debt-to-Income Ratio (DTI):')
+    document.add_paragraph('   Debt-to-Owing Ratio (DTO): '+DTO)
+    document.add_paragraph('   Debt-to-Income Ratio (DTI): '+DTI)
     
     #Cashflow analysis
     document.add_heading('Cash Flow Analysis ', level=1)
     document.add_paragraph('GDSCR', style='List Bullet')
-    document.add_paragraph('   Using Global Cash Flow Sheet, we are able to calculate the total operating income and the total debt. We calculate the operating income from the data compiled from their balance sheet, profit & loss statement, and recent tax returns. We were able to calculate the total debt from recent credit report statements from Experian. Net operating income totaled to be $83,242 in 2016. That is a monthly income of 6,937. Total debt equal $24,528 with monthly debt payments of $3,515. That is a GDSCR of 3.39')
+    document.add_paragraph("   The Global Cash Flow Sheet allows us to determine the total operating income and total debt. We compute the operating income using information from the company's balance sheet, profit and loss statement, and tax returns. The total debt is calculated based on recent credit report statements. The average net operating income is $" + total_income + " per month. The total monthly debt payments is $"+ total_debt_pmt +". This results in a Gross Debt Service Coverage Ratio (GDSCR) of " + GDSCR + ".")
     
     #Bank Statement Analsyis
     document.add_heading('Bank Statement Analysis', level=1)
-    document.add_paragraph('   We used (Business Name)’s most recent bank account statements, from Oct 2016- Jan 2017, to conduct the bank statement analysis. In the personal account, they have $33,605 in deposits and $47,415 in debits and a remaining balance of $224', style='List Bullet')
+    document.add_paragraph("   We conducted a bank statement analysis using (Business Name)'s bank account statements from October 2016 to January 2017. The analysis showed that in the personal account, there were $33,605 in deposits, $47,415 in debits, and a remaining balance of $224." , style='List Bullet')
     
     #Recommendations
     document.add_heading('Recommendation', level=1)
-    document.add_paragraph('   Keep the largest balance in business & checking accounts as possible ($500.00 to $1,000.00)- It helps with cash flow on the bank statements', style='List Bullet')
+    document.add_paragraph("   Write recomendation here", style='List Bullet')
     
     return document
 #document.add_page_break()
