@@ -110,23 +110,18 @@ def report_generator():
 
     file_path = generate_report(dic_summary)
     session["file_path"] = file_path
-    print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-    print(file_path)
-    #print(GDSCR)
     return render_template('outputCalc.html')
 
 @app.route("/download")
 def download_file():
     file_path = session.get("file_path", None)
-    print("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
-    print(file_path)
-    #f = open(file_path, "r")
+
     return send_file(file_path, as_attachment=True)
-    #return render_template('bfaReport.html')
+    
    
 
 
 
 if __name__ == "__main__":
-    app.run(debug = True)
+    app.run(debug = True, host='0.0.0.0')
     

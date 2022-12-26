@@ -44,6 +44,8 @@ def report_content(dict):
     GDSCR = str(GDSCR)
     DTO = str(DTO)
     DTI = str(DTI)
+    balance = str(balance)
+    capacity= str(capacity)
 
     #Initiate document
     document = Document()
@@ -99,7 +101,7 @@ def report_content(dict):
     
     #Bank Statement Analsyis
     document.add_heading('Bank Statement Analysis', level=1)
-    document.add_paragraph("   We conducted a bank statement analysis using (Business Name)'s bank account statements from October 2016 to January 2017. The analysis showed that in the personal account, there were $33,605 in deposits, $47,415 in debits, and a remaining balance of $224." , style='List Bullet')
+    document.add_paragraph("   We conducted a bank statement analysis and the analysis showed that the average monthly balance is "+ balance +". While based on your average deposit and withdrawal, you have a capacity of "+ capacity +"." , style='List Bullet')
     
     #Recommendations
     document.add_heading('Recommendation', level=1)
