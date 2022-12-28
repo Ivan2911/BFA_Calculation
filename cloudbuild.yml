@@ -3,7 +3,7 @@ steps:
   # Build the Docker container
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'gcr.io/bfawebapp/bfaapp', '.']
-    dir: 'my-repo'
+    
 
   # Push the Docker container to Google Container Registry
   - name: 'gcr.io/cloud-builders/docker'
